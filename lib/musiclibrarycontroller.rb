@@ -50,13 +50,14 @@ class MusicLibraryController
       names_array << imported_song.name
     end
     alpha_array = names_array.sort
+    puts "alpha_array currently returns #{alpha_array}"
     counter = 1
     final_array = []
     if alpha_array != []
       alpha_array.each do |song_name|
         song_variable = Song.find_by_name(song_name)
         final_array << song_variable
-        counter +=1
+        counter += 1
       end
     end
     final_array
@@ -255,7 +256,6 @@ class MusicLibraryController
     puts "Which song number would you like to play?"
     number_input = gets.strip
     number = number_input.to_i
-    puts "number currently returns #{number}"
     maximum = @new_music_importer.import.count
     if number == 0
       nil
@@ -267,5 +267,8 @@ class MusicLibraryController
       nil
     end
   end
+
+  def alpha_songs_list
+    
 
 end
