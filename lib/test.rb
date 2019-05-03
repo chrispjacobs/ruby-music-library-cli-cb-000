@@ -18,4 +18,4 @@ Song.create_from_filename("Real Estate - Wonder Years - dream pop.mp3")
 #   # expect($stdout).to receive(:puts).with("3. Wonder Years - dream pop")
 #
 mlc = MusicLibraryController.new
-mlc.play_song
+mlc.list_songs_array
