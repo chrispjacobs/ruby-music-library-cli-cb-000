@@ -16,14 +16,14 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
-    # user_input = gets.strip
-    # counter = 1
-    # if user_input != "exit"
-    #   until counter > 3
-    #     new_user_input = gets.chomp
-    #     counter += 1
-    #   end
-    # end
+    user_input = gets.strip
+    counter = 1
+    if user_input != "exit"
+      until counter > 3
+        new_user_input = gets.chomp
+        counter += 1
+      end
+    end
   end
 
   def list_songs
@@ -128,22 +128,22 @@ class MusicLibraryController
     end
   end
 
-  def list_songs
-    names_array = []
-    imports = @new_music_importer.import
-    imports.each do |imported_song|
-      names_array << imported_song.name
-    end
-    alpha_array = names_array.sort
-    counter = 1
-    if alpha_array != []
-      alpha_array.each do |song_name|
-        song_variable = Song.find_by_name(song_name)
-        puts "#{counter}. #{song_variable.filename.split(".")[0]}"
-        counter +=1
-      end
-    end
-  end
+  # def list_songs
+  #   names_array = []
+  #   imports = @new_music_importer.import
+  #   imports.each do |imported_song|
+  #     names_array << imported_song.name
+  #   end
+  #   alpha_array = names_array.sort
+  #   counter = 1
+  #   if alpha_array != []
+  #     alpha_array.each do |song_name|
+  #       song_variable = Song.find_by_name(song_name)
+  #       puts "#{counter}. #{song_variable.filename.split(".")[0]}"
+  #       counter +=1
+  #     end
+  #   end
+  # end
 
   # def list_artists
   #   artists_array = []
@@ -217,9 +217,18 @@ class MusicLibraryController
     artist_object = Artist.find_by_name(artist_name)
     counter = 1
     if artist_object == nil
-      self.list_songs_by_artist
+      nil
     else
+      names_array = []
       artist_object.songs.each do |song|
+        names_array << song.name
+      end
+      alpha_names_array = names_array.sort
+      alpha_songs_array = []
+      alpha_names_array.each do |song_name|
+        alpha_songs_array << Song.find_by_name(song_name)
+      end
+      alpha_songs_array.each do |song|
         puts "#{counter}. #{song.name} - #{song.genre.name}"
         counter += 1
       end
@@ -227,15 +236,15 @@ class MusicLibraryController
   end
 
   def list_songs_by_genre
-    puts "Please enter the name of an genre:"
+    puts "Please enter the name of a genre:"
     genre_name = gets.strip
     genre_object = Genre.find_by_name(genre_name)
     counter = 1
     if genre_object == nil
-      self.list_songs_by_genre
+      nil
     else
       genre_object.songs.each do |song|
-        puts "#{counter}. #{}#{song.name}"
+        puts "#{counter}. #{song.artist.name} - #{song.name}"
         counter += 1
       end
     end
@@ -246,15 +255,16 @@ class MusicLibraryController
     puts "Which song number would you like to play?"
     number_input = gets.strip
     number = number_input.to_i
-    if number > 0 && number <= @new_music_importer.import.count
+    maximum = @new_music_importer.import.count
+    if number == 0
+      nil
+    elsif number > 0 && number <= maximum
       adjusted_value = number - 1
       song_object = self.listed_songs_array[adjusted_value]
       puts "Playing #{song_object.name} by #{song_object.artist.name}"
     else
-      self.play_song
+      nil
     end
   end
-
-
 
 end
