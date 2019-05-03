@@ -269,8 +269,8 @@ class MusicLibraryController
       nil
     elsif number > 0 && number <= maximum
       adjusted_value = number - 1
-      song_object = self.listed_songs_array[adjusted_value]
-      puts "Playing #{song_object.name} by #{song_object.artist.name}"
+      song_name = self.listed_song_names_array[adjusted_value]
+      puts "Playing #{song_name} by #{Song.find_by_name(song_name).artist}"
     else
       nil
     end
