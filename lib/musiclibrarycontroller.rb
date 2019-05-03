@@ -50,7 +50,6 @@ class MusicLibraryController
       names_array << imported_song.name
     end
     alpha_array = names_array.sort
-    puts "alpha_array currently returns #{alpha_array}"
     counter = 1
     final_array = []
     if alpha_array != []
