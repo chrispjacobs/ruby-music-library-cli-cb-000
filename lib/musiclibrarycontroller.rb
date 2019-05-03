@@ -30,13 +30,13 @@ class MusicLibraryController
     elsif user_input == "list genre"
       self.list_songs_by_genre
     elsif user_input == "exit"
-      next
+      exit
     else
       @invalid_counter += 1
       if @invalid_counter < 4
         self.call
       else
-        next
+        exit
       end
     end
     # if user_input != "exit"
