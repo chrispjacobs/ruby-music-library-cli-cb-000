@@ -291,6 +291,7 @@ class MusicLibraryController
       adjusted_value = number - 1
       song_name = self.listed_song_names_array[adjusted_value]
       puts "Playing #{song_name} by #{Song.find_by_name(song_name).artist.name}"
+      exit
     else
       nil
     end
