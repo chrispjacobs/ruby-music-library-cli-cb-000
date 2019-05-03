@@ -21,14 +21,19 @@ class MusicLibraryController
     invalid_counter = 1
     if user_input == "list songs"
       self.list_songs
+      exit
     elsif user_input == "list artists"
       self.list_artists
+      exit
     elsif user_input == "list genres"
       self.list_genres
+      exit
     elsif user_input == "list artist"
       self.list_songs_by_artist
+      exit
     elsif user_input == "list genre"
       self.list_songs_by_genre
+      exit
     elsif user_input == "exit"
       exit
     else
@@ -39,12 +44,6 @@ class MusicLibraryController
         exit
       end
     end
-    # if user_input != "exit"
-    #   until counter > 3
-    #     new_user_input = gets.chomp
-    #     counter += 1
-    #   end
-    # end
   end
 
   def list_songs
