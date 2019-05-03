@@ -4,6 +4,7 @@ class MusicLibraryController
     @optional_path = optional_path
     @new_music_importer = MusicImporter.new(optional_path)
     @new_music_importer.import
+    @invalid_counter = 0
   end
 
   def call
@@ -17,13 +18,33 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
     user_input = gets.strip
-    counter = 1
-    if user_input != "exit"
-      until counter > 3
-        new_user_input = gets.chomp
-        counter += 1
+    invalid_counter = 1
+    if user_input == "list songs"
+      self.list_songs
+    elsif user_input == "list artists"
+      self.list_artists
+    elsif user_input == "list genres"
+      self.list_genres
+    elsif user_input == "list artist"
+      self.list_songs_by_artist
+    elsif user_input == "list genre"
+      self.list_songs_by_genre
+    elsif user_input == "exit"
+      next
+    else
+      @invalid_counter += 1
+      if @invalid_counter < 4
+        self.call
+      else
+        next
       end
     end
+    # if user_input != "exit"
+    #   until counter > 3
+    #     new_user_input = gets.chomp
+    #     counter += 1
+    #   end
+    # end
   end
 
   def list_songs
