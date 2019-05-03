@@ -255,6 +255,7 @@ class MusicLibraryController
     puts "Which song number would you like to play?"
     number_input = gets.strip
     number = number_input.to_i
+    puts "number currently returns #{number}"
     maximum = @new_music_importer.import.count
     if number == 0
       nil
