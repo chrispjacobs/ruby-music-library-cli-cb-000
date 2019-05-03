@@ -62,6 +62,15 @@ class MusicLibraryController
     final_array
   end
 
+  def listed_song_names_array
+    names_array = []
+    imports = @new_music_importer.import
+    imports.each do |imported_song|
+      names_array << imported_song.name
+    end
+    alpha_array = names_array.sort
+  end
+
   # def list_artists
   #   artists_array = []
   #   imports = @new_music_importer.import
